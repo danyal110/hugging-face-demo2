@@ -1,2 +1,7 @@
 gradio
 transformers[torch]
+pytest
+pylint
+black
+pytest-cov
+ipython
