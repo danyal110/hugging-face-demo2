@@ -28,13 +28,12 @@ jobs:
         run: make format
 
       - name: Add Hugging Face remote
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git remote add space https://huggingface.co/spaces/Danyal110/demo2
 
       - name: Push to Hugging Face
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF: ${{ secrets.HF }}
         run: |
-          git push --force https://Danyal110:${HF_TOKEN}@huggingface.co/spaces/Danyal110/demo2 HEAD:main
+          git push --force https://Danyal110:${HF}@huggingface.co/spaces/Danyal110/demo2 HEAD:main
