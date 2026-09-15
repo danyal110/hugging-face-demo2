@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+
+      - name: Add Remote
+        env:
+          HF: ${{secrets.HF }}
+        run: git remote add space git clone https://huggingface.co/spaces/Danyal110/demo2
+
+      - name: Push to hub
+        env: 
+          HF: ${{secrets.HF }}
+        run: git push --force  https://huggingface.co/spaces/Danyal110/demo2 main
+        
+        
+      
+      
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Lint with pylint
+        run: make lint
+
+
+      - name: Format code
+        run: make format
